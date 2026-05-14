@@ -2,7 +2,7 @@ name: CI/CD Innovatech
 
 on:
   push:
-    branches: [ "main" ] # Cambia a "deploy" cuando estés listo para la entrega final
+    branches: [ "main" ] 
 
 jobs:
   deploy:
@@ -26,16 +26,17 @@ jobs:
           username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # 1. Crear carpeta del proyecto si no existe
+            # 1. Crear carpeta si no existe y entrar
             mkdir -p ~/innovatech
             cd ~/innovatech
             
-            # 2. Clonar o actualizar el código (usamos el repo público para facilitar)
+            # 2. Actualizar código
             if [ -d ".git" ]; then
               git pull origin main
             else
               git clone https://github.com/Benjamin-Aburto/Innovatech.git .
             fi
             
-            # 3. Levantar con Docker Compose
-            docker-compose up -d --build
+            # 3. Levantar con Docker Compose V2 (Nota: 'docker compose' con ESPACIO)
+            # Esto es vital para que reconozca el Buildx que instalamos manualmente
+            docker compose up -d --build
