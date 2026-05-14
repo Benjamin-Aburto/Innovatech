@@ -12,7 +12,9 @@ services:
       - backend-net
 
   back-despachos:
-    build: ./back-Despachos
+    build: 
+      context: ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+      dockerfile: Dockerfile
     container_name: back-despachos
     depends_on:
       - db
@@ -20,7 +22,9 @@ services:
       - backend-net
 
   back-ventas:
-    build: ./back-Ventas_Spring
+    build: 
+      context: ./back-Ventas_SpringBoot/Springboot-API-REST
+      dockerfile: Dockerfile
     container_name: back-ventas
     depends_on:
       - db
@@ -28,7 +32,9 @@ services:
       - backend-net
 
   frontend:
-    build: ./front_despacho
+    build: 
+      context: ./front_despacho
+      dockerfile: Dockerfile
     container_name: front-despacho
     ports:
       - "80:80"
